@@ -15,7 +15,8 @@ namespace IntelligentKioskSample
         global::Windows.UI.Xaml.Markup.IComponentConnector,
         global::Windows.UI.Xaml.Markup.IComponentConnector2
     {
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 14.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.16.0")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private static class XamlBindingSetters
         {
             public static void Set_Windows_UI_Xaml_Controls_FontIcon_Glyph(global::Windows.UI.Xaml.Controls.FontIcon obj, global::System.String value, string targetNullValue)
@@ -44,9 +45,11 @@ namespace IntelligentKioskSample
             }
         };
 
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 14.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.16.0")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private class AppShell_obj2_Bindings :
             global::Windows.UI.Xaml.IDataTemplateExtension,
+            global::Windows.UI.Xaml.Markup.IDataTemplateComponent,
             global::Windows.UI.Xaml.Markup.IComponentConnector,
             IAppShell_Bindings
         {
@@ -57,6 +60,7 @@ namespace IntelligentKioskSample
             private bool removedDataContextHandler = false;
 
             // Fields for each control that has bindings.
+            private global::System.WeakReference obj2;
             private global::Windows.UI.Xaml.Controls.FontIcon obj3;
             private global::Windows.UI.Xaml.Controls.TextBlock obj4;
 
@@ -70,6 +74,9 @@ namespace IntelligentKioskSample
             {
                 switch(connectionId)
                 {
+                    case 2: // AppShell.xaml line 22
+                        this.obj2 = new global::System.WeakReference((global::Windows.UI.Xaml.Controls.Grid)target);
+                        break;
                     case 3: // AppShell.xaml line 31
                         this.obj3 = (global::Windows.UI.Xaml.Controls.FontIcon)target;
                         break;
@@ -99,24 +106,37 @@ namespace IntelligentKioskSample
             public int ProcessBindings(global::Windows.UI.Xaml.Controls.ContainerContentChangingEventArgs args)
             {
                 int nextPhase = -1;
-                switch(args.Phase)
-                {
-                    case 0:
-                        nextPhase = -1;
-                        this.SetDataRoot(args.Item);
-                        if (!removedDataContextHandler)
-                        {
-                            removedDataContextHandler = true;
-                            ((global::Windows.UI.Xaml.Controls.Grid)args.ItemContainer.ContentTemplateRoot).DataContextChanged -= this.DataContextChangedHandler;
-                        }
-                        this.initialized = true;
-                        break;
-                }
-                this.Update_((global::IntelligentKioskSample.NavMenuItem) args.Item, 1 << (int)args.Phase);
+                ProcessBindings(args.Item, args.ItemIndex, (int)args.Phase, out nextPhase);
                 return nextPhase;
             }
 
             public void ResetTemplate()
+            {
+                Recycle();
+            }
+
+            // IDataTemplateComponent
+
+            public void ProcessBindings(global::System.Object item, int itemIndex, int phase, out int nextPhase)
+            {
+                nextPhase = -1;
+                switch(phase)
+                {
+                    case 0:
+                        nextPhase = -1;
+                        this.SetDataRoot(item);
+                        if (!removedDataContextHandler)
+                        {
+                            removedDataContextHandler = true;
+                            (this.obj2.Target as global::Windows.UI.Xaml.Controls.Grid).DataContextChanged -= this.DataContextChangedHandler;
+                        }
+                        this.initialized = true;
+                        break;
+                }
+                this.Update_((global::IntelligentKioskSample.NavMenuItem) item, 1 << phase);
+            }
+
+            public void Recycle()
             {
             }
 
@@ -189,7 +209,7 @@ namespace IntelligentKioskSample
         /// <summary>
         /// Connect()
         /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 14.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.16.0")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public void Connect(int connectionId, object target)
         {
@@ -242,7 +262,7 @@ namespace IntelligentKioskSample
         /// <summary>
         /// GetBindingConnector(int connectionId, object target)
         /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 14.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.16.0")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public global::Windows.UI.Xaml.Markup.IComponentConnector GetBindingConnector(int connectionId, object target)
         {
@@ -257,6 +277,7 @@ namespace IntelligentKioskSample
                     bindings.SetDataRoot(element2.DataContext);
                     element2.DataContextChanged += bindings.DataContextChangedHandler;
                     global::Windows.UI.Xaml.DataTemplate.SetExtensionInstance(element2, bindings);
+                    global::Windows.UI.Xaml.Markup.XamlBindingHelper.SetDataTemplateComponent(element2, bindings);
                 }
                 break;
             }

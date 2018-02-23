@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>C:\Users\v-caspch\Desktop\IntelligentKiosk\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>DC912818C55DE6A01C95CE9DCC89D5D11DEA663ACE3CF7C12FED2E29248F6F7E</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>415A156945846B19C99DEA9B21A670A7D8EE1C3266EE7EABAD508B09502CB609</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>IntelligentKioskSample_1.0.1.0_x86__csqyw2evbp0ke</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>IntelligentKioskSample_csqyw2evbp0ke!App</RegisteredUserModeAppID>
     <RegisteredPackageID>IntelligentKioskSample</RegisteredPackageID>
@@ -31,13 +31,13 @@
     <AppXManifest Include="C:\Users\v-caspch\Desktop\IntelligentKiosk\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-02-23T03:25:58.402</Modified>
+      <Modified>2018-02-23T03:33:28.347</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\v-caspch\Desktop\IntelligentKiosk\bin\x86\Debug\IntelligentKioskSample.exe">
       <PackagePath>entrypoint\IntelligentKioskSample.exe</PackagePath>
-      <Modified>2018-02-23T03:25:54.735</Modified>
+      <Modified>2018-02-23T03:33:20.244</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-caspch\.nuget\packages\dotnetty.buffers\0.4.6\lib\netstandard1.3\DotNetty.Buffers.dll">
       <PackagePath>DotNetty.Buffers.dll</PackagePath>
@@ -739,18 +739,18 @@
       <PackagePath>IntelligentKioskSample.xr.xml</PackagePath>
       <Modified>2018-02-23T03:22:27.966</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.15063.0\Windows.winmd">
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.16299.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
-      <Modified>2018-02-22T09:44:45.357</Modified>
+      <Modified>2017-11-10T10:15:50.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-caspch\Desktop\IntelligentKiosk\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-02-23T03:25:57.659</Modified>
+      <Modified>2018-02-23T03:33:23.140</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-caspch\Desktop\IntelligentKiosk\bin\x86\Debug\Core\IntelligentKioskSample.exe">
       <PackagePath>IntelligentKioskSample.exe</PackagePath>
-      <Modified>2018-02-23T03:25:58.394</Modified>
+      <Modified>2018-02-23T03:33:28.337</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

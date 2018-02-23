@@ -8,23 +8,29 @@
 //------------------------------------------------------------------------------
 
 
-
 namespace IntelligentKioskSample
 {
     public partial class App : global::Windows.UI.Xaml.Markup.IXamlMetadataProvider
     {
-    private global::IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo.XamlTypeInfoProvider _provider;
+        private global::IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo.XamlMetaDataProvider __appProvider;
+        private global::IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo.XamlMetaDataProvider _AppProvider
+        {
+            get
+            {
+                if (__appProvider == null)
+                {
+                    __appProvider = new global::IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo.XamlMetaDataProvider();
+                }
+                return __appProvider;
+            }
+        }
 
         /// <summary>
         /// GetXamlType(Type)
         /// </summary>
         public global::Windows.UI.Xaml.Markup.IXamlType GetXamlType(global::System.Type type)
         {
-            if(_provider == null)
-            {
-                _provider = new global::IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo.XamlTypeInfoProvider();
-            }
-            return _provider.GetXamlTypeByType(type);
+            return _AppProvider.GetXamlType(type);
         }
 
         /// <summary>
@@ -32,11 +38,56 @@ namespace IntelligentKioskSample
         /// </summary>
         public global::Windows.UI.Xaml.Markup.IXamlType GetXamlType(string fullName)
         {
-            if(_provider == null)
+            return _AppProvider.GetXamlType(fullName);
+        }
+
+        /// <summary>
+        /// GetXmlnsDefinitions()
+        /// </summary>
+        public global::Windows.UI.Xaml.Markup.XmlnsDefinition[] GetXmlnsDefinitions()
+        {
+            return _AppProvider.GetXmlnsDefinitions();
+        }
+    }
+}
+
+namespace IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo
+{
+    /// <summary>
+    /// Main class for providing metadata for the app or library
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.16.0")]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed class XamlMetaDataProvider : global::Windows.UI.Xaml.Markup.IXamlMetadataProvider
+    {
+        private global::IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo.XamlTypeInfoProvider _provider = null;
+
+        private global::IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo.XamlTypeInfoProvider Provider
+        {
+            get
             {
-                _provider = new global::IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo.XamlTypeInfoProvider();
+                if (_provider == null)
+                {
+                    _provider = new global::IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo.XamlTypeInfoProvider();
+                }
+                return _provider;
             }
-            return _provider.GetXamlTypeByName(fullName);
+        }
+
+        /// <summary>
+        /// GetXamlType(Type)
+        /// </summary>
+        public global::Windows.UI.Xaml.Markup.IXamlType GetXamlType(global::System.Type type)
+        {
+            return Provider.GetXamlTypeByType(type);
+        }
+
+        /// <summary>
+        /// GetXamlType(String)
+        /// </summary>
+        public global::Windows.UI.Xaml.Markup.IXamlType GetXamlType(string fullName)
+        {
+            return Provider.GetXamlTypeByName(fullName);
         }
 
         /// <summary>
@@ -47,11 +98,8 @@ namespace IntelligentKioskSample
             return new global::Windows.UI.Xaml.Markup.XmlnsDefinition[0];
         }
     }
-}
 
-namespace IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo
-{
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.16.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     internal partial class XamlTypeInfoProvider
     {
@@ -3929,7 +3977,7 @@ namespace IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo
         }
     }
 
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.16.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     internal class XamlSystemBaseType : global::Windows.UI.Xaml.Markup.IXamlType
     {
@@ -3977,7 +4025,7 @@ namespace IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo
     internal delegate void AddToDictionary(object instance, object key, object item);
     internal delegate object CreateFromStringMethod(string args);
 
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.16.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     internal class XamlUserType : global::IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo.XamlSystemBaseType
     {
@@ -4188,7 +4236,7 @@ namespace IntelligentKioskSample.IntelligentKioskSample_XamlTypeInfo
     internal delegate object Getter(object instance);
     internal delegate void Setter(object instance, object value);
 
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.16.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     internal class XamlMember : global::Windows.UI.Xaml.Markup.IXamlMember
     {
