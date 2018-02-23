@@ -15610,20 +15610,25 @@
     "UAP,Version=v10.0.15063": []
   },
   "packageFolders": {
-    "C:\\Users\\v-emc\\.nuget\\packages\\": {}
+    "C:\\Users\\v-caspch\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Kiosk\\KioskRuntimeComponent\\KioskRuntimeComponent.csproj",
+      "projectUniqueName": "C:\\Users\\v-caspch\\Desktop\\IntelligentKiosk\\KioskRuntimeComponent\\KioskRuntimeComponent.csproj",
       "projectName": "KioskRuntimeComponent",
-      "projectPath": "C:\\Kiosk\\KioskRuntimeComponent\\KioskRuntimeComponent.csproj",
-      "projectJsonPath": "C:\\Kiosk\\KioskRuntimeComponent\\project.json",
-      "packagesPath": "C:\\Users\\v-emc\\.nuget\\packages\\",
-      "outputPath": "C:\\Kiosk\\KioskRuntimeComponent\\obj\\",
+      "projectPath": "C:\\Users\\v-caspch\\Desktop\\IntelligentKiosk\\KioskRuntimeComponent\\KioskRuntimeComponent.csproj",
+      "projectJsonPath": "C:\\Users\\v-caspch\\Desktop\\IntelligentKiosk\\KioskRuntimeComponent\\project.json",
+      "packagesPath": "C:\\Users\\v-caspch\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\v-caspch\\Desktop\\IntelligentKiosk\\KioskRuntimeComponent\\obj\\",
       "projectStyle": "ProjectJson",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\v-emc\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\v-caspch\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -15631,7 +15636,7 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
+      "Microsoft.NETCore.UniversalWindowsPlatform": "[5.1.0, )"
     },
     "frameworks": {
       "uap10.0.15063": {}

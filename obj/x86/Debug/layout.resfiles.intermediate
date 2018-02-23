@@ -1,3 +1,4 @@
+WinMetadata\Windows.winmd
 Assets\BingNewsAnalytics.png
 Assets\BingVisualSearch.jpg
 Assets\camera.png
@@ -24,4 +25,3 @@ Assets\VisionAPI.jpg
 IntelligentKioskSample.xr.xml
 Properties\Default.rd.xml
 Views\MallKioskDemoConfig\MallKioskDemoSettings.xml
-WinMetadata\Windows.winmd
