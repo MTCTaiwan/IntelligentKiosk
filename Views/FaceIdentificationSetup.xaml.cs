@@ -96,7 +96,7 @@ namespace IntelligentKioskSample.Views
             try
             {
                 this.PersonGroups.Clear();
-                IEnumerable<PersonGroup> personGroups = await FaceServiceHelper.ListPersonGroupsAsync(SettingsHelper.Instance.WorkspaceKey);
+                IEnumerable<PersonGroup> personGroups = await FaceServiceHelper.ListPersonGroupsAsync(SettingsHelper.Instance.FaceApiKey);//////
                 this.PersonGroups.AddRange(personGroups.OrderBy(pg => pg.Name));
 
                 if (this.personGroupsListView.Items.Any())
@@ -122,7 +122,7 @@ namespace IntelligentKioskSample.Views
                 }
 
                 Guid personGroupGuid = Guid.NewGuid();
-                await FaceServiceHelper.CreatePersonGroupAsync(personGroupGuid.ToString(), this.personGroupNameTextBox.Text, SettingsHelper.Instance.WorkspaceKey);
+                await FaceServiceHelper.CreatePersonGroupAsync(personGroupGuid.ToString(), this.personGroupNameTextBox.Text, SettingsHelper.Instance.FaceApiKey);//////
                 PersonGroup newGroup = new PersonGroup { Name = this.personGroupNameTextBox.Text, PersonGroupId = personGroupGuid.ToString() };
 
                 this.PersonGroups.Add(newGroup);

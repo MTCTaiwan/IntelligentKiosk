@@ -105,9 +105,9 @@ namespace IntelligentKioskSample.Views
                 {
                     if (!this.isProcessingPhoto)
                     {
-                        if (DateTime.Now.Hour != this.demographics.StartTime.Hour)
+                        if (DateTime.Now.Day != this.demographics.StartTime.Day)//////
                         {
-                            // We have been running through the hour. Reset the data...
+                            // We have been running through the day. Reset the data...
                             await this.ResetDemographicsData();
                             this.UpdateDemographicsUI();
                         }
@@ -250,7 +250,7 @@ namespace IntelligentKioskSample.Views
             }
             else
             {
-                FaceListManager.FaceListsUserDataFilter = SettingsHelper.Instance.WorkspaceKey + "_RealTime";
+                FaceListManager.FaceListsUserDataFilter = SettingsHelper.Instance.FaceApiKey + "_RealTime";//////
                 await FaceListManager.Initialize();
 
                 await ResetDemographicsData();

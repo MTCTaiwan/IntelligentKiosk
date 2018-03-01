@@ -506,7 +506,7 @@ namespace IntelligentKioskSample.Views
                 await new MessageDialog("Missing Face or Vision API Key. Please enter a key in the Settings page.", "Missing API Key").ShowAsync();
             }
 
-            FaceListManager.FaceListsUserDataFilter = SettingsHelper.Instance.WorkspaceKey + "_RealTimeFromVideo";
+            FaceListManager.FaceListsUserDataFilter = SettingsHelper.Instance.FaceApiKey + "_RealTimeFromVideo";//////
             await FaceListManager.Initialize();
 
             base.OnNavigatedTo(e);

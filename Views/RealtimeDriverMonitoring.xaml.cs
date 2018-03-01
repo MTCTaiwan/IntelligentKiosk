@@ -364,7 +364,7 @@ namespace IntelligentKioskSample.Views
             }
             else
             {
-                FaceListManager.FaceListsUserDataFilter = SettingsHelper.Instance.WorkspaceKey + "_RealTimeDriverMonitoring";
+                FaceListManager.FaceListsUserDataFilter = SettingsHelper.Instance.FaceApiKey + "_RealTimeDriverMonitoring";//////
 
                 await this.cameraControl.StartStreamAsync(isForRealTimeProcessing: true);
                 this.StartProcessingLoop();
