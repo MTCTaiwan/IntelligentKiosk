@@ -374,7 +374,7 @@ namespace IntelligentKioskSample.Views
                         System.Diagnostics.Debug.WriteLine("ID: " + person);
                         foreach (KeyValuePair<string, string> entry in dictionary)
                         {
-                            System.Diagnostics.Debug.WriteLine(entry.Key.ToString() + ": " + entry.Value.ToString());
+                            //System.Diagnostics.Debug.WriteLine(entry.Key.ToString() + ": " + entry.Value.ToString());
                             // do something with entry.Value or entry.Key
                         }
                         dictionary["personid"] = person;
@@ -382,6 +382,10 @@ namespace IntelligentKioskSample.Views
                         ////#pragma warning disable 4014
                         String str = SettingsHelper.Instance.IoTHubConnectString;
                         await IoTClient.Start(dictionary, SettingsHelper.Instance.IoTHubConnectString);
+                        if (SettingsHelper.Instance.WebhookEndpointURI.Length > 0 && dictionary["isunique"] == "1")
+                        {
+                            WebhookHelper.CallWebhookEndpoint(dictionary);
+                        }
 
                     }
                 }

@@ -206,6 +206,11 @@ namespace IntelligentKioskSample
             {
                 this.IoTHubConnectString = value.ToString();
             }
+            value = ApplicationData.Current.RoamingSettings.Values["WebhookEndpointURI"];
+            if (value != null)
+            {
+                this.WebhookEndpointURI = value.ToString();
+            }
 
             value = ApplicationData.Current.RoamingSettings.Values["CustomVisionTrainingApiKey"];
             if (value != null)
@@ -402,6 +407,18 @@ namespace IntelligentKioskSample
             {
                 this.ioTHubConnectString = value;
                 this.OnSettingChanged("IoTHubConnectString", value);
+            }
+        }
+
+
+        private string webhookEndpointURI = string.Empty;
+        public string WebhookEndpointURI
+        {
+            get { return webhookEndpointURI; }
+            set
+            {
+                this.webhookEndpointURI = value;
+                this.OnSettingChanged("WebhookEndpointURI", value);
             }
         }
 
