@@ -365,27 +365,38 @@ namespace IntelligentKioskSample.Views
                         var name = "null";
                         var person = "";
                         System.Diagnostics.Debug.WriteLine("Identify? : " + lastIdentifiedPersonSample == null);
-                        if (null != lastIdentifiedPersonSample)
+                        try
                         {
-                            name = lastIdentifiedPersonSample.First().Item2.Person.Name.ToString();
-                            person = lastIdentifiedPersonSample.First().Item2.Person.PersonId.ToString();
+                            if (null != lastIdentifiedPersonSample)
+                            {
+                                name = lastIdentifiedPersonSample.First().Item2.Person.Name.ToString();
+                                person = lastIdentifiedPersonSample.First().Item2.Person.PersonId.ToString();
+                            }
+                            System.Diagnostics.Debug.WriteLine("Name: " + name);
+                            System.Diagnostics.Debug.WriteLine("ID: " + person);
+                            dictionary["personid"] = person;
+                            dictionary["personname"] = name;
+                            ////#pragma warning disable 4014
+                            if (SettingsHelper.Instance.WebhookEndpointURI.Length > 0 && null != lastIdentifiedPersonSample)
+                            {
+                                try
+                                {
+                                    WebhookHelper.CallWebhookEndpoint(dictionary);
+                                }
+                                catch (Exception e)
+                                {
+                                    System.Diagnostics.Debug.WriteLine(e);
+                                }
+
+                            }
                         }
-                        System.Diagnostics.Debug.WriteLine("Name: " + name);
-                        System.Diagnostics.Debug.WriteLine("ID: " + person);
-                        foreach (KeyValuePair<string, string> entry in dictionary)
+                        catch (NullReferenceException ex)
                         {
-                            //System.Diagnostics.Debug.WriteLine(entry.Key.ToString() + ": " + entry.Value.ToString());
-                            // do something with entry.Value or entry.Key
+                            System.Diagnostics.Debug.WriteLine(ex);
                         }
-                        dictionary["personid"] = person;
-                        dictionary["personname"] = name;
-                        ////#pragma warning disable 4014
                         String str = SettingsHelper.Instance.IoTHubConnectString;
                         await IoTClient.Start(dictionary, SettingsHelper.Instance.IoTHubConnectString);
-                        if (SettingsHelper.Instance.WebhookEndpointURI.Length > 0 && dictionary["isunique"] == "1")
-                        {
-                            WebhookHelper.CallWebhookEndpoint(dictionary);
-                        }
+                        
 
                     }
                 }

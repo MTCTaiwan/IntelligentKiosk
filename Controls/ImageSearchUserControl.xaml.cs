@@ -156,7 +156,7 @@ namespace IntelligentKioskSample.Controls
             catch (Exception ex)
             {
                 this.imageResultsGrid.ItemsSource = null;
-                await Util.GenericApiCallExceptionHandler(ex, "Failure querying Bing Images");
+                //await Util.GenericApiCallExceptionHandler(ex, "Failure querying Bing Images");
             }
 
             this.progressRing.IsActive = false;

@@ -243,18 +243,18 @@ namespace IntelligentKioskSample.Views
 
         private async void OnPersonNameTextBoxChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-            {
-                try
-                {
-                    this.personNameTextBox.ItemsSource = await BingSearchHelper.GetAutoSuggestResults(this.personNameTextBox.Text);
-                }
-                catch (HttpRequestException)
-                {
-                    // default to no suggestions
-                    this.personNameTextBox.ItemsSource = null;
-                }
-            }
+            //if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            //{
+            //    try
+            //    {
+            //        this.personNameTextBox.ItemsSource = await BingSearchHelper.GetAutoSuggestResults(this.personNameTextBox.Text);
+            //    }
+            //    catch (HttpRequestException)
+            //    {
+            //        // default to no suggestions
+            //        this.personNameTextBox.ItemsSource = null;
+            //    }
+            //}
         }
 
         private async Task CreatePersonAsync(string name)
