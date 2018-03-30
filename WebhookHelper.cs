@@ -9,10 +9,11 @@ namespace IntelligentKioskSample
     {
         private static HttpClient httpClient = new HttpClient();
 
-        public async static void CallWebhookEndpoint(Object payload)
+        public async static void CallWebhookEndpoint(Dictionary<String, String> payload)
         {
+            DateTime start = DateTime.Now;
             Uri endpoint = new Uri(SettingsHelper.Instance.WebhookEndpointURI);
-            StringContent content = new StringContent("{\"results\":" + JsonConvert.SerializeObject(payload) + "}", System.Text.Encoding.UTF8, "application/json");
+            StringContent content = new StringContent("{\"results\": [\"" + payload["personname"] + "\"]}", System.Text.Encoding.UTF8, "application/json");
             String request = await content.ReadAsStringAsync();
             var response = await httpClient.PostAsync(endpoint, content);
 
@@ -21,9 +22,12 @@ namespace IntelligentKioskSample
             {
                 System.Diagnostics.Debug.WriteLine("[SUCCESS] HTTP 200 OK");
                 System.Diagnostics.Debug.WriteLine("[VERBOST] RESPONSE:" + responseData);
-            } else
+                ApplicationInsightsHelper.TrackRequest("Webhook", endpoint, ((int)response.StatusCode).ToString(), true, DateTime.Now - start);
+            }
+            else
             {
                 System.Diagnostics.Debug.WriteLine(string.Format("[ERROR] HTTP {0}", response.StatusCode));
+                ApplicationInsightsHelper.TrackRequest("Webhook", endpoint, ((int)response.StatusCode).ToString(), false, DateTime.Now - start);
             }
             System.Diagnostics.Debug.WriteLine(request);
 

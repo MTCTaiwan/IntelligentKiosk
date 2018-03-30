@@ -44,6 +44,8 @@
                         <Button Content="Generate New Key" Grid.Column="1" Margin="10,0,6,0" Click="OnGenerateNewKeyClicked" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                     </Grid>
 
+                    <PasswordBox Header="Application Insights Instrumentation Key" Margin="0,10,0,0" Password="{Binding ApplicationInsightsKey, Mode=TwoWay}" />
+                    
                     <StackPanel Orientation="Vertical" Margin="0,10,0,0">
                         <TextBlock Text="IoTHub Connect String" Style="{StaticResource BodyTextBlockStyle}" Margin="0"  />
                         <TextBox Text="{Binding IoTHubConnectString, Mode=TwoWay}" />

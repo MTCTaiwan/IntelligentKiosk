@@ -40,6 +40,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Windows.Foundation;
+using Windows.Graphics.Display;
 using Windows.Graphics.Imaging;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
@@ -68,12 +70,12 @@ namespace IntelligentKioskSample.Views
         private DemographicsData demographics;
         private Dictionary<Guid, Visitor> visitors = new Dictionary<Guid, Visitor>();
 
+
         public RealTimeDemo()
         {
             this.InitializeComponent();
-
+            ApplicationInsightsHelper.TrackPage("RealtimeDemo");
             this.DataContext = this;
-
             Window.Current.Activated += CurrentWindowActivationStateChanged;
             this.cameraControl.SetRealTimeDataProvider(this);
             this.cameraControl.FilterOutSmallFaces = true;
@@ -105,21 +107,27 @@ namespace IntelligentKioskSample.Views
                 {
                     if (!this.isProcessingPhoto)
                     {
-                        if (DateTime.Now.Day != this.demographics.StartTime.Day)//////
+                        try
                         {
-                            // We have been running through the day. Reset the data...
-                            await this.ResetDemographicsData();
-                            this.UpdateDemographicsUI();
-                        }
+                            if (DateTime.Now.Day != this.demographics.StartTime.Day)//////
+                            {
+                                // We have been running through the day. Reset the data...
+                                await this.ResetDemographicsData();
+                                this.UpdateDemographicsUI();
+                            }
 
-                        this.isProcessingPhoto = true;
-                        if (this.cameraControl.NumFacesOnLastFrame == 0)
+                            this.isProcessingPhoto = true;
+                            if (this.cameraControl.NumFacesOnLastFrame == 0)
+                            {
+                                await this.ProcessCameraCapture(null);
+                            }
+                            else
+                            {
+                                await this.ProcessCameraCapture(await this.cameraControl.CaptureFrameAsync());
+                            }
+                        } catch (Exception ex)
                         {
-                            await this.ProcessCameraCapture(null);
-                        }
-                        else
-                        {
-                            await this.ProcessCameraCapture(await this.cameraControl.CaptureFrameAsync());
+                            ApplicationInsightsHelper.TrackException(ex);
                         }
                     }
                 });
@@ -152,17 +160,27 @@ namespace IntelligentKioskSample.Views
                 this.isProcessingPhoto = false;
                 return;
             }
-
             DateTime start = DateTime.Now;
+            try
+            {
 
-            // Compute Emotion, Age and Gender
-            await this.DetectFaceAttributesAsync(e);
+                // Compute Emotion, Age and Gender
+                await this.DetectFaceAttributesAsync(e);
 
-            // Compute Face Identification and Unique Face Ids
-            await Task.WhenAll(ComputeFaceIdentificationAsync(e), this.ComputeUniqueFaceIdAsync(e));
+                // Compute Face Identification and Unique Face Ids
+                await Task.WhenAll(ComputeFaceIdentificationAsync(e), this.ComputeUniqueFaceIdAsync(e));
 
-            this.UpdateDemographics(e);
-            this.UpdateEmotionTimelineUI(e);
+                this.UpdateDemographics(e);
+                this.UpdateEmotionTimelineUI(e);
+                ApplicationInsightsHelper.TrackRequest("Face API Call", null, "200", true, start.Ticks, DateTime.Now.Ticks);
+
+            }
+            catch (Exception ex)
+            {
+                ApplicationInsightsHelper.TrackException(ex);
+                ApplicationInsightsHelper.TrackRequest("Face API Call", null, "400", false, start.Ticks, DateTime.Now.Ticks);
+            }
+
 
             this.debugText.Text = string.Format("Latency: {0}ms", (int)(DateTime.Now - start).TotalMilliseconds);
 
@@ -199,7 +217,13 @@ namespace IntelligentKioskSample.Views
 
         private async Task DetectFaceAttributesAsync(ImageAnalyzer e)
         {
-            await e.DetectFacesAsync(detectFaceAttributes: true);
+            try
+            {
+                await e.DetectFacesAsync(detectFaceAttributes: true);
+            } catch (Exception ex)
+            {
+                ApplicationInsightsHelper.TrackException(ex);
+            }
 
             if (e.DetectedFaces == null || !e.DetectedFaces.Any())
             {
@@ -385,6 +409,7 @@ namespace IntelligentKioskSample.Views
                                 }
                                 catch (Exception e)
                                 {
+                                    ApplicationInsightsHelper.TrackException(e);
                                     System.Diagnostics.Debug.WriteLine(e);
                                 }
 
@@ -393,10 +418,10 @@ namespace IntelligentKioskSample.Views
                         catch (NullReferenceException ex)
                         {
                             System.Diagnostics.Debug.WriteLine(ex);
+                            ApplicationInsightsHelper.TrackException(ex);
                         }
                         String str = SettingsHelper.Instance.IoTHubConnectString;
                         await IoTClient.Start(dictionary, SettingsHelper.Instance.IoTHubConnectString);
-                        
 
                     }
                 }
@@ -445,7 +470,8 @@ namespace IntelligentKioskSample.Views
             ApplicationView view = ApplicationView.GetForCurrentView();
             if (!view.IsFullScreenMode)
             {
-                view.TryEnterFullScreenMode();
+                // Uncomment to enable auto-fullscreen
+                //view.TryEnterFullScreenMode();
             }
         }
 
@@ -456,7 +482,6 @@ namespace IntelligentKioskSample.Views
             this.cameraControl.CameraAspectRatioChanged -= CameraControl_CameraAspectRatioChanged;
 
             await this.ResetDemographicsData();
-
             await this.cameraControl.StopStreamAsync();
             base.OnNavigatingFrom(e);
         }

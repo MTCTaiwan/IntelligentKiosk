@@ -129,14 +129,14 @@ namespace ServiceHelpers
             }
             catch (Exception e)
             {
-                ErrorTrackingHelper.TrackException(e, "Face API DetectAsync error");
+                //ErrorTrackingHelper.TrackException(e, "Face API DetectAsync error");
 
-                this.DetectedFaces = Enumerable.Empty<Face>();
+                //this.DetectedFaces = Enumerable.Empty<Face>();
 
-                if (this.ShowDialogOnFaceApiErrors)
-                {
-                    await ErrorTrackingHelper.GenericApiCallExceptionHandler(e, "Face detection failed.");
-                }
+                //if (this.ShowDialogOnFaceApiErrors)
+                //{
+                //    await ErrorTrackingHelper.GenericApiCallExceptionHandler(e, "Face detection failed.");
+                //}
             }
             finally
             {
@@ -322,12 +322,13 @@ namespace ServiceHelpers
                     {
                         // Catch errors with individual groups so we can continue looping through all groups. Maybe an answer will come from
                         // another one.
-                        ErrorTrackingHelper.TrackException(e, "Face API IdentifyAsync error");
+                        //ErrorTrackingHelper.TrackException(e, "Face API IdentifyAsync error");
 
-                        if (this.ShowDialogOnFaceApiErrors)
-                        {
-                            await ErrorTrackingHelper.GenericApiCallExceptionHandler(e, "Failure identifying faces");
-                        }
+                        //if (this.ShowDialogOnFaceApiErrors)
+                        //{
+                        //    await ErrorTrackingHelper.GenericApiCallExceptionHandler(e, "Failure identifying faces");
+                        //}
+                        System.Diagnostics.Debug.WriteLine(e);
                     }
                 }
 
